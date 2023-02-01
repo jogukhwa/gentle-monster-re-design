@@ -150,30 +150,40 @@ $(".m-header .m-menu ul li a").click(function(e){
         e.preventDefault()
     })
 
+
+
+
 //콜라보레이션 
-
-
 
 
     let idx = 0;
 
     $(".collabo-right ul li").mouseover(function(){
+
         idx = $(this).index();
         $(".collabo-left .img-content").hide().eq(idx).show()
         $(".collabo-right ul li").removeClass("on").eq(idx).addClass("on")
         clearInterval(timer)
+
     }).mouseout(function(){
+
         clearInterval(timer)
         timer = setInterval(function(){
+
             idx++
             if(idx > $(".collabo-right ul li").length-1){
                 idx = 0;
             }
             $(".collabo-left .img-content").hide().eq(idx).show()
+
+            if($(window).width() < 767){
+                $(".collabo-right ul li").hide().eq(idx).show()
+            }
             $(".collabo-right ul li").removeClass("on").eq(idx).addClass("on")
         }, 4000)
+
     }).click(function(e){
-        e.preventDefault()
+        e.preventDefault()                             
         
         let c = $(this).index()
         $(".collabo-left .img-content").hide().eq(c).show()
@@ -181,31 +191,32 @@ $(".m-header .m-menu ul li a").click(function(e){
     })
 
 
-
     let timer = setInterval(function(){
+
         idx++;
         if(idx > $(".collabo-right ul li").length-1){
             idx = 0;
         }
         $(".collabo-right ul li").removeClass("on").eq(idx).addClass("on")
-        $(".collabo-right ul li").hide().eq(idx).show();
+        
+        if($(window).width() < 767){
+            $(".collabo-right ul li").hide().eq(idx).show()
+        }
+        
         $(".collabo-left .img-content").hide().eq(idx).show()
     }, 4000)
 
 
     if (matchMedia("screen and (max-width: 767px)").matches) {
-        // 1024px 이상에서 사용할 JavaScript
-
         $(".collabo-right ul li").hide().eq(idx).show()
-      } else {
+    } else {
         $(".collabo-right ul li").show();
-        // 1024px 미만에서 사용할 JavaScript
-      }
+    }
     
     
     $(window).resize(function(){
         let $width = $(window).width();
-        if($width < 767){
+        if($width <767){
             $(".collabo-right ul li").hide().eq(idx).show()
         }else{
             $(".collabo-right ul li").show();
